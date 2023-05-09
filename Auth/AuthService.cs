@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.AspNetCore.Identity;
 using UnicApi.Auth.Models;
 using UnicApi.Users.Entities;
@@ -24,7 +25,7 @@ public class AuthService
             bool isPassCorrect = await userManager.CheckPasswordAsync(user, signInModel.Password);
             if (isPassCorrect)
             {
-                var token = jwtProvider.GenerateAccessToken(user);
+                var token = await jwtProvider.GenerateAccessTokenAsync(user);
                 return token;
             }
         }
@@ -39,9 +40,16 @@ public class AuthService
 
         if (!result.Succeeded)
         {
-            throw new BadHttpRequestException("User couldn't be created");
+            StringBuilder message = new StringBuilder();
+            foreach (IdentityError error in result.Errors)
+            {
+                message.Append(error + Environment.NewLine);
+            }
+            throw new BadHttpRequestException(message.ToString());
         }
 
-        return jwtProvider.GenerateAccessToken(user);
+        await userManager.AddToRoleAsync(user, RolesEnum.Student.ToString());
+
+        return await jwtProvider.GenerateAccessTokenAsync(user);
     }
 }

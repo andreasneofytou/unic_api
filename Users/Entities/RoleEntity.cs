@@ -12,3 +12,11 @@ public class RoleEntity : IdentityRole<string>
     {
     }
 }
+
+public enum RolesEnum
+{
+    Superuser,
+    Admin,
+    Lecturer,
+    Student
+}

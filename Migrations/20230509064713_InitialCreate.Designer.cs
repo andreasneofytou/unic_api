@@ -12,7 +12,7 @@ using UnicApi.Data;
 namespace UnicApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230508113650_InitialCreate")]
+    [Migration("20230509064713_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -134,6 +134,7 @@ namespace UnicApi.Migrations
             modelBuilder.Entity("UnicApi.Users.Entities.RoleEntity", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")

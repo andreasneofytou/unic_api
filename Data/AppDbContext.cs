@@ -17,6 +17,8 @@ public class AppDbContext : IdentityDbContext<UserEntity, RoleEntity, string>
         builder.Entity<UserEntity>(entity => entity.Property(e => e.Id).ValueGeneratedOnAdd());
 
         builder.Entity<RoleEntity>().ToTable("Role");
+        builder.Entity<RoleEntity>(entity => entity.Property(e => e.Id).ValueGeneratedOnAdd());
+
         builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaim");
         builder.Entity<IdentityUserRole<string>>().ToTable("UserRole");
         builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogin");

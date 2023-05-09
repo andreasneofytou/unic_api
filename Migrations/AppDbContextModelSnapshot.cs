@@ -131,6 +131,7 @@ namespace UnicApi.Migrations
             modelBuilder.Entity("UnicApi.Users.Entities.RoleEntity", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyStamp")
