@@ -8,6 +8,8 @@ using UnicApi.Users.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using UnicApi.Auth.Options;
+using UnicApi.Classes;
+using UnicApi.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,8 +54,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+//Services
 builder.Services.AddTransient<AuthService>();
 builder.Services.AddTransient<JwtProvider>();
+builder.Services.AddTransient<UsersService>();
+builder.Services.AddTransient<ClassesService>();
 
 
 var app = builder.Build();

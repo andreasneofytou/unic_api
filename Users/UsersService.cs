@@ -14,9 +14,11 @@ public class UsersService
 
     private DbSet<LecturerEntity> lecturers;
 
-    public UsersService(UserManager<UserEntity> userManager)
+    public UsersService(UserManager<UserEntity> userManager, AppDbContext appDbContext)
     {
         this.userManager = userManager;
+        this.appDbContext = appDbContext;
+        lecturers = appDbContext.Set<LecturerEntity>();
     }
 
     public async Task<UserEntity> CreateUserAsync(CreateUserModel createUserModel)

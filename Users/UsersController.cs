@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> CreateLecturer(CreateLecturerModel createLecturerModel)
     {
-        UserEntity user = await usersService.CreateLecturerAsync(createLecturerModel);
-        return Ok();
+        LecturerEntity? user = await usersService.CreateLecturerAsync(createLecturerModel);
+        return Ok(user);
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UnicApi.Classes.Entities;
 using UnicApi.Users.Entities;
 
 namespace UnicApi.Data;
@@ -8,6 +9,8 @@ namespace UnicApi.Data;
 public class AppDbContext : IdentityDbContext<UserEntity, RoleEntity, string>
 {
     public DbSet<LecturerEntity> Lecturers { get; set; }
+    public DbSet<PeriodEntity> Periods { get; set; }
+    public DbSet<SubjectEntity> Subjects { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
                : base(options) { }
@@ -28,7 +31,8 @@ public class AppDbContext : IdentityDbContext<UserEntity, RoleEntity, string>
         builder.Entity<IdentityUserToken<string>>().ToTable("UserToken");
 
         builder.Entity<LecturerEntity>().ToTable("Lecturer");
-
+        builder.Entity<PeriodEntity>().ToTable("Period");
+        builder.Entity<SubjectEntity>().ToTable("Subject");
 
         foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
         {
